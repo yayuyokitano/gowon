@@ -406,3 +406,13 @@ export class NoRatingsError extends ClientError {
     );
   }
 }
+
+export class NotAuthenticatedWithSpotifyError extends ClientError {
+  name = "NotAuthenticatedWithSpotifyError";
+
+  constructor(prefix: string) {
+    super(
+      `You need to be authenticated with Spotify in order to run this command! Please login with \`${prefix}slogin\``
+    );
+  }
+}

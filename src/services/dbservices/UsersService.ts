@@ -14,6 +14,7 @@ import { buildRequestable } from "../../helpers/parseMentions";
 import { sqlLikeEscape } from "../../helpers/database";
 import { ServiceRegistry } from "../ServicesRegistry";
 import { AnalyticsCollector } from "../../analytics/AnalyticsCollector";
+import { SpotifyCode } from "../Spotify/SpotifyService.types";
 
 export class UsersService extends BaseService {
   get analyticsCollector() {
@@ -204,6 +205,27 @@ export class UsersService extends BaseService {
     const user = await this.getUser(ctx, discordID);
 
     user.isPatron = value;
+
+    await user.save();
+  }
+
+  async getSpotifyCode(
+    ctx: BaseServiceContext,
+    discordID: string
+  ): Promise<SpotifyCode | undefined> {
+    const user = await this.getUser(ctx, discordID);
+
+    return user.spotifyCode ? { code: user.spotifyCode, state: "" } : undefined;
+  }
+
+  async setSpotifyCode(
+    ctx: BaseServiceContext,
+    discordID: string,
+    code: SpotifyCode
+  ) {
+    const user = await this.getUser(ctx, discordID);
+
+    user.spotifyCode = code.code;
 
     await user.save();
   }

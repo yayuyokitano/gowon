@@ -33,6 +33,7 @@ import { SettingsService } from "../lib/settings/SettingsManager";
 import { AnalyticsCollector } from "../analytics/AnalyticsCollector";
 import { WordBlacklistService } from "./WordBlacklistService";
 import { RollbarService } from "./Rollbar/RollbarService";
+import { SpotifyAuthenticationService } from "./Spotify/SpotifyAuthenticationService";
 
 type Service<T = any> = { new (): T };
 
@@ -68,6 +69,7 @@ const services: Service[] = [
   RollbarService,
   SettingsService,
   SpotifyService,
+  SpotifyAuthenticationService,
   TagsService,
   TrackingService,
   UsersService,
